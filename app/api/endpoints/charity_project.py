@@ -3,8 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.validators import (check_charity_project_edit, check_name_duplicate,
-check_project_exists)#*****
+from app.api.validators import check_charity_project_edit, check_name_duplicate
 from app.core.db import get_async_session
 from app.core.user import current_superuser
 from app.crud.charity_project import charity_project_crud
@@ -38,7 +37,7 @@ async def create_charity_project(
     charity_project: CharityProjectCreate,
     session: AsyncSession = Depends(get_async_session)
 ):
-    """Только для суперпользователей."""
+    """Создание проекта только для суперпользователей."""
 
     await check_name_duplicate(charity_project.name, session)
     new_project = await charity_project_crud.create(charity_project, session)
