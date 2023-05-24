@@ -131,6 +131,6 @@ dmypy.json
 # .idea
 .idea
 
-#fastapi.db
+fastapi.db
 test.db
 .env
