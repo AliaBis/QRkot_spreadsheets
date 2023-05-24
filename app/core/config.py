@@ -1,5 +1,5 @@
 from typing import Optional
-import os
+
 from pydantic import BaseSettings, EmailStr
 
 
