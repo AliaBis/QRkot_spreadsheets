@@ -13,22 +13,38 @@ TABLE = [
     ['Проекты по скорости закрытия'],
     ['Название проекта', 'Время сбора', 'Описание']
 ]
-TABLE_BODY = dict(
-    properties=dict(
-        title=f'Отчет от {DATE_TIME}',
-        locale='ru_RU',
-    ),
-    sheets=[dict(properties=dict(
-        sheetType='GRID',
-        sheetId=0,
-        title='Лист1',
-        gridProperties=dict(
-            rowCount=100,
-            columnCount=4,
-        )
-    ))]
-)
+# TABLE_BODY = dict(
+#     properties=dict(
+#         title=f'Отчет от {DATE_TIME}',
+#         locale='ru_RU',
+#     ),
+#     sheets=[dict(properties=dict(
+#         sheetType='GRID',
+#         sheetId=0,
+#         title='Лист1',
+#         gridProperties=dict(
+#             rowCount=100,
+#             columnCount=4,
+#         )
+#     ))]
+# )
 
+TABLE_BODY = {
+        'properties': {
+            'title': f'Отчет на {DATE_TIME}',
+                       'locale': 'ru_RU'},
+            'sheets': [{
+                'properties': {
+                    'sheetType': 'GRID',
+                    'sheetId': 0,
+                    'title': 'Лист1',
+                    'gridProperties': {'rowCount': 100,
+                    'columnCount': 11
+                    }
+                }
+            }
+        ]
+    }
 
 async def spreadsheets_create(aiogoogle_object: Aiogoogle) -> str:
     """Создание таблицы"""
