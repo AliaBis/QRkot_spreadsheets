@@ -4,7 +4,7 @@ from pydantic import BaseSettings, EmailStr
 
 
 class Settings(BaseSettings):
-    """Секреты настроек"""
+    """Секреты настроек."""
     app_title: str = 'Приложение QRKot'
     description: str = 'Сбор пожертвований для котиков'
     database_url: str = 'sqlite+aiosqlite:///./fastapi.db'
