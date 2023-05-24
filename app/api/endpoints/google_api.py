@@ -20,14 +20,15 @@ router = APIRouter()
     summary='Отчет по закрытым проектам'
 )
 async def get_report(
-        aiogoogle_object: Aiogoogle = Depends(get_service),
+        wrapper_services: Aiogoogle = Depends(get_service),
         session: AsyncSession = Depends(get_async_session)
 ):
-    """Суперюзеры могут сформировать отчет по закрытым проектам."""
+    """Здесь создание отчета о скорости закрытия проекта в гугл табл.
+    Только суперюзеры могут сформировать отчет."""
     projects = await charity_project_crud.get_projects_by_completion_rate(session)
-    spreadsheet_id = await spreadsheets_create(aiogoogle_object)
-    await set_user_permissions(spreadsheet_id, aiogoogle_object)
+    spreadsheet_id = await spreadsheets_create(wrapper_services)
+    await set_user_permissions(spreadsheet_id, wrapper_services)
     await spreadsheets_update_value(spreadsheet_id,
                                     projects,
-                                    aiogoogle_object)
+                                    wrapper_services)
     return projects
