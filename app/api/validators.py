@@ -26,7 +26,6 @@ async def check_charity_project_edit(
     full_amount: int = None,
     delete: bool = False
 ) -> CharityProject:
-    """Изменения проекта"""
     project = await charity_project_crud.get(project_id, session)
     if not project:
         raise HTTPException(

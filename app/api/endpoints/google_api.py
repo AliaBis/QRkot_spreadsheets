@@ -17,11 +17,10 @@ router = APIRouter()
     '/',
     response_model=list[dict],
     dependencies=[Depends(current_superuser)],
-    summary='Отчет по закрытым проектам'
 )
 async def get_report(
-        wrapper_services: Aiogoogle = Depends(get_service),
-        session: AsyncSession = Depends(get_async_session)
+        session: AsyncSession = Depends(get_async_session),
+        wrapper_services: Aiogoogle = Depends(get_service)
 ):
     """Здесь создание отчета о скорости закрытия проекта в гугл табл.
     Только суперюзеры могут сформировать отчет."""

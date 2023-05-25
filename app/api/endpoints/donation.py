@@ -23,7 +23,7 @@ router = APIRouter()
 async def get_all_donations(
     session: AsyncSession = Depends(get_async_session)
 ):
-    """Список всех донатов,только для суперюзеров."""
+    """Только для суперюзеров."""
 
     all_donations = await donation_crud.get_multi(session)
     return all_donations
@@ -39,7 +39,7 @@ async def create_donation(
     session: AsyncSession = Depends(get_async_session),
     user: User = Depends(current_user)
 ):
-    """Создать донат, только для зарег.пользователей."""
+    """Только для зарегистрированных пользователей."""
 
     new_donation = await donation_crud.create(donation, session, user)
     await process_investments(session)

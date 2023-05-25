@@ -13,6 +13,4 @@ app.include_router(main_router)
 
 @app.on_event('startup')
 async def startup():
-    """Стартует корутина create_first_superuser
-    создание суперюзера."""
     await create_first_superuser()

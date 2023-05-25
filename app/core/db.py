@@ -9,7 +9,7 @@ class PreBase:
     @declared_attr
     def __tablename__(cls):
         """Именем таблицы будет название модели в нижнем регистре.
-        Имена во все таблицы будет добавлено поле ID.."""
+        Имена Во все таблицы будет добавлено поле ID."""
         return cls.__name__.lower()
 
     id = Column(Integer, primary_key=True)

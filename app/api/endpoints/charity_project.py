@@ -37,7 +37,7 @@ async def create_charity_project(
     charity_project: CharityProjectCreate,
     session: AsyncSession = Depends(get_async_session)
 ):
-    """Создание проекта только для суперпользователей."""
+    """Только для суперпользователей."""
 
     await check_name_duplicate(charity_project.name, session)
     new_project = await charity_project_crud.create(charity_project, session)

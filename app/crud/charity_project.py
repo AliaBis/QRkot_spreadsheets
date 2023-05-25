@@ -21,22 +21,5 @@ class CRUDCharityProject(CRUDBase):
         )
         return db_project_id.scalars().first()
 
-    async def get_projects_by_completion_rate(
-            self, session: AsyncSession) -> list[dict]:
-        """Oтсортирует список со всеми закрытыми проектами."""
-        projects = await session.execute(
-            select(
-                CharityProject.name, CharityProject.close_date,
-                CharityProject.create_date,
-                CharityProject.description).where(
-                    CharityProject.fully_invested))
-        result = []
-        for obj in projects:
-            result.append({
-                'name': obj.name,
-                'delta': obj.close_date - obj.create_date,
-                'description': obj.description})
-        return sorted(result, key=lambda x: x['delta'])
-
 
 charity_project_crud = CRUDCharityProject(CharityProject)
