@@ -61,5 +61,3 @@ async def spreadsheets_update_value(
             range='A1:E30',
             valueInputOption='USER_ENTERED',
             json=update_body))
-
-

@@ -4,9 +4,12 @@ from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from typing import Optional
 from pydantic import BaseSettings, EmailStr
+
+
 BASE_DIR = Path(__file__).parent.parent
 DT_FORMAT = '%d.%m.%Y %H:%M:%S'
 LOG_FORMAT = '"%(asctime)s - [%(levelname)s] - %(message)s"'
+
 
 class Settings(BaseSettings):
     app_title: str = 'Приложение QRKot'
@@ -47,7 +50,6 @@ def configure_logging():
         level=logging.INFO,
         handlers=(rotating_handler, logging.StreamHandler())
     )
-
 
 
 settings = Settings()
