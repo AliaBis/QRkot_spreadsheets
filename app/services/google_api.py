@@ -29,6 +29,7 @@ TABLE_HEADER = [
     ['Название проекта', 'Время сбора', 'Описание']
 ]
 
+
 async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
     '''Функция создания таблицы'''
     service = await wrapper_services.discover('sheets', 'v4')
