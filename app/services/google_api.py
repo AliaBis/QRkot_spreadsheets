@@ -6,7 +6,7 @@ from aiogoogle import Aiogoogle
 from app.core.config import settings
 
 
-DOCUMENT_SIZE='A1:D100'
+DOCUMENT_SIZE = 'A1:D100'
 FORMAT = "%Y/%m/%d %H:%M:%S"
 NOW_DATE_TIME = datetime.now().strftime(FORMAT)
 BODY_TABLE = dict(

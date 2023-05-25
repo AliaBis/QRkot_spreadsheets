@@ -10,7 +10,7 @@ from app.crud.charity_project import charity_project_crud
 from app.schemas.charity_project import (CharityProjectCreate,
                                          CharityProjectDB,
                                          CharityProjectUpdate)
-from app.services.process_investing import (close_or_donation,
+from app.services.process_investing import (close_donation,
                                             process_investments)
 
 router = APIRouter()
@@ -66,7 +66,7 @@ async def update_charity_project(
         await check_name_duplicate(json_data_user.name, session)
     if full_amount == existing_project.invested_amount:
         existing_project.full_amount = full_amount
-        close_or_donation(existing_project)
+        close_donation(existing_project)
     updated_project = await charity_project_crud.update(
         existing_project, json_data_user, session
     )

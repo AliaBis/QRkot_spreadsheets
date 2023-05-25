@@ -6,8 +6,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import CharityProject, Donation
 
 
-def close_or_donation(obj):
-    """Закрыть или донат"""
+def close_donation(obj):
+    """Закрыть донат"""
     obj.invested_amount = obj.full_amount
     obj.fully_invested = True
     obj.close_date = datetime.now()
@@ -36,13 +36,13 @@ async def process_investments(
             )
             if project_amount_left > donation_amount_left:
                 project.invested_amount += donation_amount_left
-                close_or_donation(donation)
+                close_donation(donation)
             elif project_amount_left < donation_amount_left:
                 donation.invested_amount += project_amount_left
-                close_or_donation(project)
+                close_donation(project)
             else:
-                close_or_donation(project)
-                close_or_donation(donation)
+                close_donation(project)
+                close_donation(donation)
             session.add(project)
             session.add(donation)
             if project.fully_invested:
