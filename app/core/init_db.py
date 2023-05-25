@@ -16,7 +16,7 @@ get_user_manager_context = contextlib.asynccontextmanager(get_user_manager)
 async def create_user(
         email: EmailStr, password: str, is_superuser: bool = False
 ):
-    """Корутина, создающая юзера с переданным email и паролем"""
+    """Корутина, создающая юзера с переданным email и паролем."""
     try:
         async with get_async_session_context() as session:
             async with get_user_db_context(session) as user_db:
