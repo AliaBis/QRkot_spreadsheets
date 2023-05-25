@@ -53,24 +53,22 @@ async def create_charity_project(
 )
 async def update_charity_project(
         project_id: int,
-        obj_in: CharityProjectUpdate,
+        json_data_user: CharityProjectUpdate,
         session: AsyncSession = Depends(get_async_session),
 ):
-    """Редактирование для суперпользователей."""
+    """Обновление для суперпользователей."""
 
-    full_amount = (
-        obj_in.full_amount if obj_in.full_amount is not None else None
-    )
+    full_amount = json_data_user.full_amount
     existing_project = await check_charity_project_edit(
         project_id, session, full_amount=full_amount
     )
-    if obj_in.name is not None:
-        await check_name_duplicate(obj_in.name, session)
+    if json_data_user.name is not None:
+        await check_name_duplicate(json_data_user.name, session)
     if full_amount == existing_project.invested_amount:
         existing_project.full_amount = full_amount
         close_or_donation(existing_project)
     updated_project = await charity_project_crud.update(
-        existing_project, obj_in, session
+        existing_project, json_data_user, session
     )
     return updated_project
 

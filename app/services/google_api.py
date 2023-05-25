@@ -6,6 +6,7 @@ from aiogoogle import Aiogoogle
 from app.core.config import settings
 
 
+DOCUMENT_SIZE='A1:D100'
 FORMAT = "%Y/%m/%d %H:%M:%S"
 NOW_DATE_TIME = datetime.now().strftime(FORMAT)
 BODY_TABLE = dict(
@@ -37,7 +38,6 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
         service.spreadsheets.create(json=BODY_TABLE)
     )
     spreadsheet_id = response['spreadsheetId']
-    print(spreadsheet_id)
     return spreadsheet_id
 
 
@@ -67,7 +67,6 @@ async def spreadsheets_update_value(
     service = await wrapper_services.discover('sheets', 'v4')
     table_values = TABLE_HEADER
     for project in projects:
-        print(project, type(project))
         new_row = [
             str(project['name']),
             str(timedelta(project['_no_label'])),
@@ -83,7 +82,7 @@ async def spreadsheets_update_value(
         await wrapper_services.as_service_account(
             service.spreadsheets.values.update(
                 spreadsheetId=spreadsheet_id,
-                range='A1:D100',
+                range=DOCUMENT_SIZE,
                 valueInputOption='USER_ENTERED',
                 json=update_body
             )

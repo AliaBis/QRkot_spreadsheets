@@ -25,8 +25,7 @@ async def get_all_donations(
 ):
     """Только для суперюзеров."""
 
-    all_donations = await donation_crud.get_multi(session)
-    return all_donations
+    return await donation_crud.get_multi(session)
 
 
 @router.post(
@@ -57,6 +56,4 @@ async def get_user_donations(
     user: User = Depends(current_user)
 ):
     """Только для зарегистрированных пользователей."""
-
-    user_donations = await donation_crud.get_by_user(user, session)
-    return user_donations
+    return await donation_crud.get_by_user(user, session)
