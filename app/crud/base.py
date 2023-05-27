@@ -22,7 +22,9 @@ class CRUDBase:
         return db_obj.scalars().first()
 
     async def get_multi(
-        self, session: AsyncSession):
+        self,
+        session: AsyncSession
+    ):
         db_objs = await session.execute(select(self.model))
         return db_objs.scalars().all()
 

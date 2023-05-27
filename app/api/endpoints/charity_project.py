@@ -70,7 +70,7 @@ async def update_charity_project(
         existing_project, json_data_user, session
     )
     return updated_project
-    
+
 
 @router.delete(
     '/{project_id}',
