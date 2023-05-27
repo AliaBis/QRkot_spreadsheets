@@ -1,5 +1,4 @@
 from typing import List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -37,7 +36,7 @@ async def create_charity_project(
     charity_project: CharityProjectCreate,
     session: AsyncSession = Depends(get_async_session)
 ):
-    """Только для суперпользователей."""
+    """Создание документа только для суперпользователей."""
 
     await check_name_duplicate(charity_project.name, session)
     new_project = await charity_project_crud.create(charity_project, session)
@@ -62,8 +61,8 @@ async def update_charity_project(
     existing_project = await check_charity_project_edit(
         project_id, session, full_amount=full_amount
     )
-    if json_data_user.name is not None:
-        await check_name_duplicate(json_data_user.name, session)
+    # if json_data_user.name is not None:
+    await check_name_duplicate(json_data_user.name, session)
     if full_amount == existing_project.invested_amount:
         existing_project.full_amount = full_amount
         close_donation(existing_project)
@@ -71,7 +70,7 @@ async def update_charity_project(
         existing_project, json_data_user, session
     )
     return updated_project
-
+    
 
 @router.delete(
     '/{project_id}',

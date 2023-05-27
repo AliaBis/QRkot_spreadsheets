@@ -32,7 +32,7 @@ TABLE_HEADER = [
 
 
 async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
-    '''Функция создания таблицы'''
+    """Функция создания таблицы"""
     service = await wrapper_services.discover('sheets', 'v4')
     response = await wrapper_services.as_service_account(
         service.spreadsheets.create(json=BODY_TABLE)
@@ -45,7 +45,7 @@ async def set_user_permissions(
         spreadsheet_id: str,
         wrapper_services: Aiogoogle
 ) -> None:
-    '''Функция для предоставления прав доступа'''
+    """Функция для предоставления прав доступа"""
     permissions_body = {'type': 'user',
                         'role': 'writer',
                         'emailAddress': settings.email}
@@ -63,7 +63,7 @@ async def spreadsheets_update_value(
         projects: list,
         wrapper_services: Aiogoogle
 ) -> None:
-    '''Записывает полученную из БД информацию в документ с таблицами'''
+    """Записывает полученную из БД информацию в документ с таблицами"""
     service = await wrapper_services.discover('sheets', 'v4')
     table_values = TABLE_HEADER
     for project in projects:
